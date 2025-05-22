@@ -5,7 +5,7 @@ base="true"
 laptop="false"
 fde="false"
 desktop="false"
-desktop-vm-host="false"
+desktop_vm_host="false"
 hacks="false"
 
 
@@ -17,7 +17,7 @@ fde_packages=" tpm2-tss tpm2-tools sbctl "
 
 desktop_packages=" wayland uwsm hyprland libnewt hyprlock hyprpaper waybar otf-font-awesome pulseaudio pavucontrol bluez bluez-tools kitty dolphin firefox "
 
-desktop-vm-host_packages=" virt-manager libvirtd qemu-full dnsmasq "
+desktop_vm_host_packages=" virt-manager libvirtd qemu-full dnsmasq "
 
 hacks_packages=" nmap aircrack-ng bessid cowpatty "
 
@@ -27,7 +27,7 @@ if [ $base = 'true' ]; then pacstrap_command+=$base_packages; fi
 if [ $laptop = 'true' ]; then pacstrap_command+=$laptop_packages; fi
 if [ $fde = 'true' ]; then pacstrap_command+=$fde_packages; fi
 if [ $desktop = 'true']; then pacstrap_command+=$desktop_packages; fi
-if [ $desktop-vm-host = 'true' ]; then pacstrap_command+=$desktop-vm-host_packages; fi
+if [ $desktop_vm_host = 'true' ]; then pacstrap_command+=$desktop-vm-host_packages; fi
 if [ $hacks = 'true' ]; then pacstrap_command+=$hacks_packages; fi
 
 eval $packstrap_command
