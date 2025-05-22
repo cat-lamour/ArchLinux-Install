@@ -31,6 +31,7 @@
     * Run `./scripts/make_bootable`.
 
 * Reboot into fresh install
+    * Set root password: `passwd`.
     * Exit the chroot.
     * `umount -R /mnt; swapoff <path_to_partition>`
     * `shutdown -r now`
