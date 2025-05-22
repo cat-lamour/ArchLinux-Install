@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-which -s wget b2sum gpg
+which -s wget sha256sum gpg
 if [ $? -eq 0 ]; then
     echo 'All tools present. Proceed.'
     echo ''

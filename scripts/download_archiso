@@ -27,7 +27,7 @@ function verify {
         grep $file sha256sums.txt >> real256sums.txt
     done
 
-    sha256sum -c real256sums.txt
+    sha256sum -q -c real256sums.txt
     rm real256sums.txt
 
     gpg -q --auto-key-locate clear,wkd -v --locate-external-key pierre@archlinux.org 2>/dev/null 1>/dev/null
