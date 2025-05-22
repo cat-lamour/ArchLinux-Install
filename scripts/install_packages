@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 
-base = true
-laptop = false
-fde = false
-desktop = false
-desktop-vm-host = false
-hacks = false
+base="true"
+laptop="false"
+fde="false"
+desktop="false"
+desktop-vm-host="false"
+hacks="false"
 
 
 base_packages=" base linux linux-firmware dracut dhclient which less man tmux vim wget curl "
