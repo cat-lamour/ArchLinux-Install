@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+
+which -s wget b2sum gpg
+if [ $? -eq 0 ]; then
+    echo 'All tools present. Proceed.'
+    echo ''
+else
+    echo 'Missing something deep within your soul. Ensure toolchain is installed.'
+fi
