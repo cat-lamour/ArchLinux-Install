@@ -30,4 +30,4 @@ if [ $desktop = 'true' ]; then pacstrap_command+=$desktop_packages; fi
 if [ $desktop_vm_host = 'true' ]; then pacstrap_command+=$desktop-vm-host_packages; fi
 if [ $hacks = 'true' ]; then pacstrap_command+=$hacks_packages; fi
 
-eval $packstrap_command
+eval $pacstrap_command
