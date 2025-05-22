@@ -21,11 +21,13 @@
 
 * Base system
     * Pacstrap: `./scripts/install_packages`.
+    * FSTab: `genfstab -U /mnt >> /mnt/etc/fstab`
     * CHRoot: `arch-chroot /mnt`.
     * Locale: `./scripts/setup_locale`.
     * Set hostname: `echo '<hostname>' > /etc/hostname`.
 
 * UKI via Dracut
+    * Dracut configs
     * Run `./scripts/make_bootable`.
 
 * Reboot into fresh install

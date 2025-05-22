@@ -9,7 +9,7 @@ desktop_vm_host="false"
 hacks="false"
 
 
-base_packages=" base linux linux-firmware dracut dhclient which less man tmux vim wget curl "
+base_packages=" base linux linux-firmware binutils dracut dhclient which less man tmux vim wget curl "
 
 laptop_packages=" iwd acpi "
 
