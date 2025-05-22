@@ -5,4 +5,9 @@ HowTos, Guides, Scripts, and more.
 
 
 ## Basic Install
-Run `scripts/tool_check`
+### Check for tools
+Run `./scripts/tool_check`
+
+
+## Grab and verify ISO
+Run `./scripts/download_archiso`
