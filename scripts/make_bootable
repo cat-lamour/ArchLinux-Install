@@ -6,5 +6,5 @@ cp /archlinux-install/configs/basic/dracut/* /etc/dracut.conf.d/
 sed -i "s/ROOT_PARTITION/$1/" /etc/dracut.conf.d/cmdline.conf
 
 # can't use uname -r here as we can't guarantee archiso and pacstrap make use of the same kernel
-dracut --uefi /efi/EFI/Linux/arch-linux.efi --kver $(ls -1 /lib/modules| head -n 1)
+dracut --uefi /efi/EFI/Linux/arch-linux.efi --kver $(ls -1 /lib/modules| head -n 1) --force
 bootctl install
