@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+
+mkdir -p /efi/EFI/Linux
+
+# can't use uname -r here as we can't guarantee archiso and pacstrap make use of the same kernel
+dracut --uefi /efi/EFI/Linux/arch-linux.efi --kver $(ls -1 /lib/modules| head -n 1)
+bootctl install

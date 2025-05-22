@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+
+base = true
+laptop = false
+fde = false
+desktop = false
+desktop-vm-host = false
+hacks = false
+
+
+base_packages=" base linux linux-firmware dracut dhclient which less man tmux vim wget curl "
+
+laptop_packages=" iwd acpi "
+
+fde_packages=" tpm2-tss tpm2-tools sbctl "
+
+desktop_packages=" wayland uwsm hyprland libnewt hyprlock hyprpaper waybar otf-font-awesome pulseaudio pavucontrol bluez bluez-tools kitty dolphin firefox "
+
+desktop-vm-host_packages=" virt-manager libvirtd qemu-full dnsmasq "
+
+hacks_packages=" nmap aircrack-ng bessid cowpatty "
+
+
+pacstrap_command='pacstrap -K /mnt '
+if [ $base = 'true' ]; then pacstrap_command+=$base_packages; fi
+if [ $laptop = 'true' ]; then pacstrap_command+=$laptop_packages; fi
+if [ $fde = 'true' ]; then pacstrap_command+=$fde_packages; fi
+if [ $desktop = 'true']; then pacstrap_command+=$desktop_packages; fi
+if [ $desktop-vm-host = 'true' ]; then pacstrap_command+=$desktop-vm-host_packages; fi
+if [ $hacks = 'true' ]; then pacstrap_command+=$hacks_packages; fi
+
+eval $packstrap_command
