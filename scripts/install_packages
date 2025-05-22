@@ -26,7 +26,7 @@ pacstrap_command='pacstrap -K /mnt '
 if [ $base = 'true' ]; then pacstrap_command+=$base_packages; fi
 if [ $laptop = 'true' ]; then pacstrap_command+=$laptop_packages; fi
 if [ $fde = 'true' ]; then pacstrap_command+=$fde_packages; fi
-if [ $desktop = 'true']; then pacstrap_command+=$desktop_packages; fi
+if [ $desktop = 'true' ]; then pacstrap_command+=$desktop_packages; fi
 if [ $desktop_vm_host = 'true' ]; then pacstrap_command+=$desktop-vm-host_packages; fi
 if [ $hacks = 'true' ]; then pacstrap_command+=$hacks_packages; fi
 
