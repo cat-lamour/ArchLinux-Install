@@ -24,14 +24,9 @@ function install_packages {
 }
 
 
-function fstab {
-    genfstab -U /mnt /mnt/etc/fstab
-}
-
-
 function main {
     install_packages
-    fstab
+    genfstab -U /mnt >> /mnt/etc/fstab
 }
 
 
