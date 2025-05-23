@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+
+if [ -z $1 ] || [ -z $2 ]; then help; fi
+drive=$1
+hostname=$2
+
+
+function help {
+    echo 'Please specify the root partition and hostname'
+    exit
+}
+
+
+function fail {
+    echo $1
+    exit
+}
+
+
+function locale {
+    ln -sf /usr/share/zoneinfo/US/Mountain /etc/localtime
+    hwclock --systohc
+
+    echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
+    locale-gen
+
+    echo 'LANG=en_US.UTF-8' > /etc/locale.conf
+    echo 'KEYMAP=us' > /etc/vconsole.conf
+}
+
+
+function make_bootable {
+    mkdir -p /efi/EFI/Linux
+    cp /ArchLinux-Install/configs/basic/dracut/* /etc/dracut.conf.d/
+    sed -i "s,ROOT_PARTITION,$drive," /etc/dracut.conf.d/cmdline.conf
+
+    dracut --uefi /efi/EFI/Linux/arch-linux.efi --kver $(ls -1 /lib/modules | head -n 1) --force
+    bootctl install
+}
+
+
+function main {
+    locale
+    make_bootable
+
+    echo $2 > /etc/hostname
+    passwd
+}
+
+
+main

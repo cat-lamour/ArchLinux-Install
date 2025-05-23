@@ -1,11 +1,18 @@
 # Basic Install
-* Acquire image
-    * Check for tools: Run `./scripts/tool_check`.
-    * Download and verify archiso: Run `./scripts/download_archiso`.
+## Preboot
+* Configure UEFI if necessary
+    Refer to your machine's owner's manual.
 
+* Acquire image
+    * Run `./scripts/basic/preboot <download_directory> <USB_device>`.
+    * Reboot into the USB device.
+
+
+## Postboot
 * Connect to "T H E  I N T E R N E T"
-    * Over ethernet: `dhclient eth0`.
-    * Over wifi: `iwctl station wlan0 <network_essid> connect; dhclient wlan0`.
+    * Over ethernet: Should autoconnect.
+    * Over wifi: `iwctl station wlan0 <network_essid> connect`.
+        Iwd, as configured on the archiso image, will automatically run a DHCP client.
 
 * Setup disks
     * Use `lsblk` and `cfdisk` to choose, define, and write partitions.
@@ -19,19 +26,13 @@
         * EFI: `mount --mkdir <path_to_partition> /mnt/efi`.
         * swap: `swapon <path_to_partition>`.
 
-* Base system
-    * Pacstrap: `./scripts/install_packages`.
-    * FSTab: `genfstab -U /mnt >> /mnt/etc/fstab`
+* Basic system requirements
+    * Run `./scripts/basic/postboot`.
     * CHRoot: `arch-chroot /mnt`.
-    * Locale: `./scripts/setup_locale`.
-    * Set hostname: `echo '<hostname>' > /etc/hostname`.
 
-* UKI via Dracut
-    * Dracut configs
-    * Run `./scripts/make_bootable`.
 
-* Reboot into fresh install
-    * Set root password: `passwd`.
+## PostChroot
+    * Run `./scripts/basic/postchroot <rootfs_partition> <hostname>`.
     * Exit the chroot.
-    * `umount -R /mnt; swapoff <path_to_partition>`
-    * `shutdown -r now`
+    * Unmount the drives: `umont -R /mnt; swapoff <path_to_swap_partition>`
+    * Reboot into fresh install: `shutdown -r now`

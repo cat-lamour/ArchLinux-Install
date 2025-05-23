@@ -1,49 +1,67 @@
 #!/usr/bin/env bash
 
 
+if [ -z $1 ] || [ -z $2 ]; then help; fi
 downloaddir=$1
-if [ -z $1 ]; then
-    mkdir archiso_download
-    downloaddir=archiso_download
-fi
+device=$2
+
+
+function help {
+    echo 'Specify directory to download to and device to write to, in that order.'
+    exit
+}
+
+
+function fail {
+    echo $1
+    exit
+}
+
+
+function toolcheck {
+    which -s wget grep sha256sum gpg dd
+    if [ $? -eq 0 ]; then help; fi
+}
 
 
 function download {
     cd $downloaddir
-    
+
     wget -q https://geo.mirror.pkgbuild.com/iso/latest/archlinux-x86_64.iso
     wget -q https://geo.mirror.pkgbuild.com/iso/latest/archlinux-x86_64.iso.sig
-    wget -q https://geo.mirror.pkgbuild.com/iso/latest/b2sums.txt
     wget -q https://geo.mirror.pkgbuild.com/iso/latest/sha256sums.txt
-
-    echo 'Download complete.'
 }
 
 
 function verify {
     cd $downloaddir
 
-    for file in ./*; do
+    for file in ./*; do 
         grep $file sha256sums.txt >> real256sums.txt
     done
-
     sha256sum -q -c real256sums.txt
-    rm real256sums.txt
 
-    gpg -q --auto-key-locate clear,wkd -v --locate-external-key pierre@archlinux.org 2>/dev/null 1>/dev/null
+    gpg --q --auto-key-locate clear,wkd -v --locate-external-key pierre@archlinux.org 2>/dev/null 1>/dev/null
     gpg -q --keyserver-options auto-key-retrieve --verify archlinux-x86_64.iso.sig archlinux-x86_64.iso 2>/dev/null 1>/dev/null
 
     if [ $? -ne 0 ]; then
-        echo 'Something has gone horribly wrong. Do not trust these images!'
-    else
-        echo 'They are old signatures, but they check out.'
+        fail "DO NOT TRUST THESE IMAGES!"
     fi
 }
 
 
+function write {
+    cd $downloaddir
+
+    dd if=archlinux-x86_64.iso of=$device status=progress
+}
+
+
 function main {
+    toolcheck
     download
     verify
+    write
 }
 
 

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+
+packages=' base linux linux-firmware binutils dracut dhclient which less man tmux vim wget curl '
+
+
+function help {
+    echo 'Run this only once you've configured disks and mounted at least /mnt and /mnt/efi.'
+    exit
+}
+
+
+function fail {
+    echo $1
+    exit
+}
+
+
+function install_packages {
+    pacstrap_command='pacstrap -K /mnt'
+    pacstrap_command+=$packages
+
+    eval $pacstrap_command
+}
+
+
+function fstab {
+    genfstab -U /mnt /mnt/etc/fstab
+}
+
+
+function main {
+    install_packages
+    fstab
+}
+
+
+main
