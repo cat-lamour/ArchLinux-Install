@@ -44,7 +44,7 @@ function main {
     locale
     make_bootable
 
-    echo $2 > /etc/hostname
+    echo $hostname > /etc/hostname
     passwd
 }
 
