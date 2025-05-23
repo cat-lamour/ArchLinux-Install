@@ -32,7 +32,7 @@
 
 
 ## PostChroot
-    * Run `./scripts/basic/postchroot <rootfs_partition> <hostname>`.
-    * Exit the chroot.
-    * Unmount the drives: `umont -R /mnt; swapoff <path_to_swap_partition>`
-    * Reboot into fresh install: `shutdown -r now`
+* Run `./scripts/basic/postchroot <rootfs_partition> <hostname>`.
+* Exit the chroot.
+* Unmount the drives: `umont -R /mnt; swapoff <path_to_swap_partition>`
+* Reboot into fresh install: `shutdown -r now`
