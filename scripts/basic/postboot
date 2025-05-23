@@ -5,7 +5,7 @@ packages=' base linux linux-firmware binutils dracut dhclient which less man tmu
 
 
 function help {
-    echo 'Run this only once you've configured disks and mounted at least /mnt and /mnt/efi.'
+    echo 'Run this only once you have configured disks and mounted at least /mnt and /mnt/efi.'
     exit
 }
 
